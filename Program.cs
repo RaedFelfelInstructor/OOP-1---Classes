@@ -7,6 +7,8 @@ namespace OOP_1___Classes
         static string[] studentNames = new string[100];
         static string[] studentIds = new string[100];
         static string[] studentMobileNumbers = new string[100];
+        static string[] studentEmails = new string[100];
+
         static int studentCount = 0;
 
         static void Main(string[] args)
@@ -55,6 +57,7 @@ namespace OOP_1___Classes
                 studentNames[i] = studentNames[i + 1];
                 studentIds[i] = studentIds[i + 1];
                 studentMobileNumbers[i] = studentMobileNumbers[i + 1];
+                studentEmails[i] = studentEmails[i + 1];
             }
 
             studentCount--;
@@ -80,13 +83,17 @@ namespace OOP_1___Classes
             var name = Console.ReadLine();
             if (!string.IsNullOrEmpty(name)) studentNames[index] = name;
 
-            Console.Write($"Current ID: {studentNames[index]}. New ID: ");
+            Console.Write($"Current ID: {studentIds[index]}. New ID: ");
             var id = Console.ReadLine();
             if (!string.IsNullOrEmpty(id)) studentIds[index] = id;
 
-            Console.Write($"Current mobile: {studentNames[index]}. New mobile: ");
+            Console.Write($"Current mobile: {studentMobileNumbers[index]}. New mobile: ");
             var mobile = Console.ReadLine();
             if (!string.IsNullOrEmpty(mobile)) studentMobileNumbers[index] = mobile;
+
+            Console.Write($"Current email: {studentEmails[index]}. New mobile: ");
+            var email = Console.ReadLine();
+            if (!string.IsNullOrEmpty(email)) studentEmails[index] = email;
 
             Console.WriteLine("Student updated successfully!");
         }
@@ -101,12 +108,12 @@ namespace OOP_1___Classes
 
             Console.WriteLine("\nAll Students:");
             Console.WriteLine("----------------------------------------");
-            Console.WriteLine("Index | Name | ID | Mobile Number");
+            Console.WriteLine("Index | Name | ID | Mobile Number | Email");
             Console.WriteLine("----------------------------------------");
 
             for (int i = 0; i < studentCount; i++)
             {
-                Console.WriteLine($"{i} | {studentNames[i]} | {studentIds[i]} | {studentMobileNumbers[i]} ");
+                Console.WriteLine($"{i} | {studentNames[i]} | {studentIds[i]} | {studentMobileNumbers[i]} | {studentEmails[i]}");
             }
         }
 
@@ -121,10 +128,12 @@ namespace OOP_1___Classes
             Console.Write("Enter student name: "); var name = Console.ReadLine();
             Console.Write("Enter student ID: "); var id = Console.ReadLine();
             Console.Write("Enter student mobile: "); var mobile = Console.ReadLine();
+            Console.Write("Enter student email: "); var email = Console.ReadLine();
 
             studentNames[studentCount] = name;
             studentIds[studentCount] = id;
             studentMobileNumbers[studentCount] = mobile;
+            studentEmails[studentCount] = email;
             studentCount++;
 
             Console.WriteLine("Student added successfully!");
