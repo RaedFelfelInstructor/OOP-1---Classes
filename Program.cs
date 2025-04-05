@@ -1,13 +1,29 @@
 ﻿
 namespace OOP_1___Classes
 {
+    class Student
+    {
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string MobileNumber { get; set; }
+
+        public Student(string name, string id, string mobileNumber)
+        {
+            Name = name;
+            Id = id;
+            MobileNumber = mobileNumber;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} | {Id} | {MobileNumber}";
+        }
+    }
+
     internal class Program
     {
 
-        static string[] studentNames = new string[100];
-        static string[] studentIds = new string[100];
-        static string[] studentMobileNumbers = new string[100];
-        static int studentCount = 0;
+        static List<Student> students = new List<Student>();
 
         static void Main(string[] args)
         {
@@ -40,24 +56,16 @@ namespace OOP_1___Classes
         {
             ViewAllStudents();
 
-            if (studentCount == 0) return;
+            if (students.Count == 0) return;
 
             Console.Write("\nEnter the index to delete: ");
-            if (!int.TryParse(Console.ReadLine(), out int index) || index < 0 || index >= studentCount)
+            if (!int.TryParse(Console.ReadLine(), out int index) || index < 0 || index >= students.Count)
             {
                 Console.WriteLine("Invalid index.");
                 return;
             }
 
-            // shift all elements after the deleted index
-            for (int i = index; i < studentCount - 1; i++)
-            {
-                studentNames[i] = studentNames[i + 1];
-                studentIds[i] = studentIds[i + 1];
-                studentMobileNumbers[i] = studentMobileNumbers[i + 1];
-            }
-
-            studentCount--;
+            students.RemoveAt(index);
 
             Console.WriteLine("Student deleted successfully!");
         }
@@ -66,34 +74,35 @@ namespace OOP_1___Classes
         {
             ViewAllStudents();
 
-            if (studentCount == 0) return;
+            if (students.Count == 0) return;
 
             Console.Write("\nEnter the index to update: ");
-            if (!int.TryParse(Console.ReadLine(), out int index) || index < 0 || index >= studentCount) {
+            if (!int.TryParse(Console.ReadLine(), out int index) || index < 0 || index >= students.Count) {
                 Console.WriteLine("Invalid index.");
                 return;
             }
 
+            var student = students[index];
             Console.WriteLine("Leave blank if you don't want to update a field.");
 
-            Console.Write($"Current name: {studentNames[index]}. New name: ");
+            Console.Write($"Current name: {student.Name}. New name: ");
             var name = Console.ReadLine();
-            if (!string.IsNullOrEmpty(name)) studentNames[index] = name;
+            if (!string.IsNullOrEmpty(name)) student.Name = name;
 
-            Console.Write($"Current ID: {studentNames[index]}. New ID: ");
+            Console.Write($"Current ID: {student.Id}. New ID: ");
             var id = Console.ReadLine();
-            if (!string.IsNullOrEmpty(id)) studentIds[index] = id;
+            if (!string.IsNullOrEmpty(id)) student.Id = id;
 
-            Console.Write($"Current mobile: {studentNames[index]}. New mobile: ");
+            Console.Write($"Current mobile: {student.MobileNumber}. New mobile: ");
             var mobile = Console.ReadLine();
-            if (!string.IsNullOrEmpty(mobile)) studentMobileNumbers[index] = mobile;
+            if (!string.IsNullOrEmpty(mobile)) student.MobileNumber = mobile;
 
             Console.WriteLine("Student updated successfully!");
         }
 
         private static void ViewAllStudents()
         {
-            if (studentCount == 0)
+            if (students.Count == 0)
             {
                 Console.WriteLine("No students found.");
                 return;
@@ -104,28 +113,21 @@ namespace OOP_1___Classes
             Console.WriteLine("Index | Name | ID | Mobile Number");
             Console.WriteLine("----------------------------------------");
 
-            for (int i = 0; i < studentCount; i++)
+            for (int i = 0; i < students.Count; i++)
             {
-                Console.WriteLine($"{i} | {studentNames[i]} | {studentIds[i]} | {studentMobileNumbers[i]} ");
+                Console.WriteLine($"{i} | {students[i]} ");
             }
         }
 
         private static void AddStudent()
         {
-            if (studentCount >= studentNames.Length)
-            {
-                Console.WriteLine("Cannot add more students. Storage is FULL!");
-                return;
-            }
-
+            
             Console.Write("Enter student name: "); var name = Console.ReadLine();
             Console.Write("Enter student ID: "); var id = Console.ReadLine();
             Console.Write("Enter student mobile: "); var mobile = Console.ReadLine();
 
-            studentNames[studentCount] = name;
-            studentIds[studentCount] = id;
-            studentMobileNumbers[studentCount] = mobile;
-            studentCount++;
+            var newStudent = new Student(name, id, mobile);
+            students.Add(newStudent);
 
             Console.WriteLine("Student added successfully!");
         }
