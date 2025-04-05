@@ -6,17 +6,19 @@ namespace OOP_1___Classes
         public string Name { get; set; }
         public string Id { get; set; }
         public string MobileNumber { get; set; }
+        public string Email { get; set; }
 
-        public Student(string name, string id, string mobileNumber)
+        public Student(string name, string id, string mobileNumber, string email)
         {
             Name = name;
             Id = id;
             MobileNumber = mobileNumber;
+            Email = email;  
         }
 
         public override string ToString()
         {
-            return $"{Name} | {Id} | {MobileNumber}";
+            return $"{Name} | {Id} | {MobileNumber} | {Email}";
         }
     }
 
@@ -97,6 +99,10 @@ namespace OOP_1___Classes
             var mobile = Console.ReadLine();
             if (!string.IsNullOrEmpty(mobile)) student.MobileNumber = mobile;
 
+            Console.Write($"Current mobile: {student.Email}. New mobile: ");
+            var email = Console.ReadLine();
+            if (!string.IsNullOrEmpty(email)) student.Email = mobile;
+
             Console.WriteLine("Student updated successfully!");
         }
 
@@ -110,7 +116,7 @@ namespace OOP_1___Classes
 
             Console.WriteLine("\nAll Students:");
             Console.WriteLine("----------------------------------------");
-            Console.WriteLine("Index | Name | ID | Mobile Number");
+            Console.WriteLine("Index | Name | ID | Mobile Number | Eamil");
             Console.WriteLine("----------------------------------------");
 
             for (int i = 0; i < students.Count; i++)
@@ -125,8 +131,9 @@ namespace OOP_1___Classes
             Console.Write("Enter student name: "); var name = Console.ReadLine();
             Console.Write("Enter student ID: "); var id = Console.ReadLine();
             Console.Write("Enter student mobile: "); var mobile = Console.ReadLine();
+            Console.Write("Enter student Email: "); var email = Console.ReadLine();
 
-            var newStudent = new Student(name, id, mobile);
+            var newStudent = new Student(name, id, mobile, email);
             students.Add(newStudent);
 
             Console.WriteLine("Student added successfully!");
